@@ -1,0 +1,17 @@
+<div id="grid-galerie">
+    <% let i=0; for (let imag of locals.imagini) { d=new Date(); var v_luni=["ianuarie", "februarie" , "martie"
+        ,"aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"]; if(imag.luni &&
+        imag.luni.includes(v_luni[d.getMonth()]) && i<=12) { i=i+1; %>
+
+        <section id="<%-"imagine-galerie"+i%>">
+            <figure>
+                <picture>
+                    <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
+                    <img src="<%- imag.fisier %>" alt="imagine">
+                </picture>
+                <figcaption><%- imag.descriere %></figcaption>
+            </figure>
+        </section>
+        <% } %>
+            <% } %>
+</div>

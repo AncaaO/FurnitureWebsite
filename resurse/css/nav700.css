@@ -1,0 +1,46 @@
+body {
+    --inaltime-meniu: 40px;
+    --latime-buton: 100%;
+}
+
+#hamburger {
+    display: block;
+}
+
+#hamburger>img {
+    height: var(--inaltime-meniu);
+    width: auto;
+    margin: 0;
+    display: block;
+}
+
+ul.menu {
+    display: none;
+    animation-name: animatie-meniu;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    transform-origin: top left;
+
+}
+
+#ch-menu:checked+ul.menu {
+    display: block;
+}
+
+@keyframes animatie-meniu {
+    0% {
+        opacity: 0;
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}

@@ -1,0 +1,62 @@
+{
+	"cale_galerie": "resurse/imagini/galerie",
+	"imagini": [
+		{
+			"fisier": "1.jpg",
+			"descriere": "Baie",
+			"luni": [
+				"martie",
+				"februarie",
+				"noiembrie",
+				"aprilie"
+			]
+		},
+		{
+			"fisier": "2.jpg",
+			"descriere": "Hol",
+			"luni": [
+				"ianuarie",
+				"februarie",
+				"iunie"
+			]
+		},
+		{
+			"fisier": "3.jpg",
+			"descriere": "Fotoliu",
+			"luni": [
+				"ianuarie",
+				"noiembrie",
+				"iunie",
+				"martie",
+				"aprilie"
+			]
+		},
+		{
+			"fisier": "4.jpg",
+			"descriere": "Masuta de cafea",
+			"luni": [
+				"noiembrie",
+				"aprilie"
+			]
+		},
+		{
+			"fisier": "5.jpg",
+			"descriere": "Vaza"
+		},
+		{
+			"fisier": "6.jpg",
+			"descriere": "Masa de dining"
+		},
+		{
+			"fisier": "7.jpg",
+			"descriere": "Mobilier exterior",
+			"luni": [
+				"ianuarie",
+				"noiembrie",
+				"iunie",
+				"martie",
+				"aprilie"
+			]
+		}
+	]
+}

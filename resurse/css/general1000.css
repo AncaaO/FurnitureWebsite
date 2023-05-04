@@ -1,0 +1,27 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    --spatiere-pagina: 20px;
+    --padding-sectiune: 10px;
+}
+
+#grid-pagina {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "z-home z-home z-home"
+        "z-diverse z-diverse z-diverse"
+        "z-calendar z-tabel z-anunturi"
+        "z-utilizatori z-statistici z-date-site";
+    gap: 10px 5px;
+
+}
+
+.scrollbar {
+    overflow-x: scroll;
+}
+
+img {
+    width: 100%;
+    max-width: 500px;
+}

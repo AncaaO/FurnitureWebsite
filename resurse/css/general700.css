@@ -1,0 +1,26 @@
+html {
+    font-size: 14px;
+}
+
+body {
+    --spatiere-pagina: 10px;
+    --padding-sectiune: 5px;
+}
+
+#grid-pagina {
+    display: block;
+    margin: 5px;
+}
+
+#grid-pagina>* {
+    margin-bottom: 15px;
+}
+
+.scrollbar {
+    overflow-x: scroll;
+}
+
+img {
+    width: 100%;
+    max-width: 350px;
+}
