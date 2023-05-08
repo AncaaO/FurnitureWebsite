@@ -18,7 +18,7 @@ client.connect();
 client.query("select * from lab8_16", function (err, rez) {
     console.log("Eroare BD", err);
 
-    console.log("Rezultat BD", rez);
+    console.log("Rezultat BD", rez.rows);
 });
 
 
@@ -79,7 +79,7 @@ for (let numeFis of vFisiere) {
 
 
 fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
-    console.log(eveniment, numeFis);
+    //console.log(eveniment, numeFis);
     if (eveniment == "change" || eveniment == "rename") {
         let caleCompleta = path.join(obGlobal.folderScss, numeFis);
         if (fs.existsSync(caleCompleta)) {
@@ -110,11 +110,56 @@ app.get(["/index", "/", "/home"], function (req, res) {
     res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
 })
 
+
+app.get("/produse", function (req, res) {
+
+
+    //TO DO query pentru a selecta toate produsele
+    //TO DO se adauaga filtrarea dupa tipul produsului
+    //TO DO se selecteaza si toate valorile din enum-ul categ_prajitura
+    let conditieWhere="";
+    if(req.query.tip)
+        conditieWhere=` where tip_produs='${req.query.tip}'`
+
+    client.query("select * from prajituri" + conditieWhere, function (err, rez) {
+        console.log(300)
+        if (err) {
+            console.log(err);
+            afiseazaEroare(res, 2);
+        }
+        else
+            res.render("pagini/produse", { produse: rez.rows, optiuni: [] });
+    });
+
+
+});
+
+
+app.get("/produs/:id", function (req, res) {
+    console.log(req.params);
+
+    client.query(`select * from prajituri where id=${req.params.id}`, function (err, rezultat) {
+        if (err) {
+            console.log(err);
+            afiseazaEroare(res, 2);
+        }
+        else
+            res.render("pagini/produs", { prod: rezultat.rows[0]});
+    });
+});
+
+client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rez) {
+    console.log(err);
+    console.log(rez);
+})
+
+
 app.get("/*.ejs", function (req, res) {
     afiseazaEroare(res, 400);
 })
 
 app.get("/*", function (req, res) {
+    console.log(req.url);
     try {
         res.render("pagini" + req.url, function (err, rezRandare) {
             if (err) {
