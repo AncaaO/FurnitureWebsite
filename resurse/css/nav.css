@@ -10,6 +10,7 @@
     --culoare-border-buton: black;
   }
   nav {
+    /* display: none; */
     --text-meniu: black;
     background-color: var(--culoare-meniu);
     width: calc(100vw - 18px);
