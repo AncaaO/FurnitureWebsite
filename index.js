@@ -27,8 +27,18 @@ obGlobal = {
     obImagini: null,
     folderScss: path.join(__dirname, "resurse/scss"),
     folderCss: path.join(__dirname, "resurse/css"),
-    folderBackup: path.join(__dirname, "backup")
+    folderBackup: path.join(__dirname, "backup"),
+    optiuniMeniu:[]
 }
+
+client.query("select * from unnest(enum_range(null::tipuri_produse))", function (err, rezCategorie) {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        obGlobal.optiuniMeniu = rezCategorie.rows;
+    }
+});
 
 app = express();
 console.log("Folder proiect", __dirname);
@@ -47,8 +57,9 @@ for (let folder of vectorFoldere) {
 
 function compileazaScss(caleScss, caleCss) {
     if (!caleCss) {
-        let vectorCale = caleScss.split("\\")
-        let numeFisExt = vectorCale[vectorCale.length - 1];
+        // let vectorCale = caleScss.split("\\")
+        // let numeFisExt = vectorCale[vectorCale.length - 1];
+        let numeFisExt = path.basename(caleScss);
         let numeFis = numeFisExt.split(".")[0]
         caleCss = numeFis + ".css";
     }
@@ -56,12 +67,19 @@ function compileazaScss(caleScss, caleCss) {
         caleScss = path.join(obGlobal.folderScss, caleScss)
     if (!path.isAbsolute(caleCss))
         caleCss = path.join(obGlobal.folderCss, caleCss)
-    //la acest punct avem cai absolute in caleScss si caleCss
+    
+    
+    let caleBackup = path.join(obGlobal.folderBackup, "resurse/css");
+    if(!fs.existsSync(caleBackup)){
+        fs.mkdirSync(caleBackup, {recursive:true})
+    }
 
-    let vectorCale = caleCss.split("\\");
-    let numeFisCss = vectorCale[vectorCale.length - 1];
+    //la acest punct avem cai absolute in caleScss si caleCss
+    // let vectorCale = caleCss.split("\\");
+    // let numeFisCss = vectorCale[vectorCale.length - 1];
+    let numeFisCss = path.basename(caleCss);
     if (fs.existsSync(caleCss)) {
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeFisCss))
+        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css",  numeFisCss))
     }
     rez = sass.compile(caleScss, { "sourceMap": true });
     fs.writeFileSync(caleCss, rez.css)
@@ -94,6 +112,11 @@ app.set("view engine", "ejs");
 app.use("/resurse", express.static(__dirname + "/resurse"));
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
+app.use("/*", function(req, res, next){
+    res.locals.optiuniMeniu = obGlobal.optiuniMeniu;
+    next();
+});
+
 app.use(/^\/resurse(\/[a-zA-Z0-9]*)*$/, function (req, res) {
     afiseazaEroare(res, 403);
 });
@@ -112,25 +135,30 @@ app.get(["/index", "/", "/home"], function (req, res) {
 
 
 app.get("/produse", function (req, res) {
-
-
     //TO DO query pentru a selecta toate produsele
     //TO DO se adauaga filtrarea dupa tipul produsului
     //TO DO se selecteaza si toate valorile din enum-ul categ_prajitura
-    let conditieWhere="";
-    if(req.query.tip)
-        conditieWhere=` where tip_produs='${req.query.tip}'`
-
-    client.query("select * from prajituri" + conditieWhere, function (err, rez) {
-        console.log(300)
+    client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rezCategorie) {
         if (err) {
             console.log(err);
-            afiseazaEroare(res, 2);
         }
-        else
-            res.render("pagini/produse", { produse: rez.rows, optiuni: [] });
-    });
+        else {
+            let conditieWhere = "";
+            if (req.query.tip)
+                conditieWhere = ` where tip_produs='${req.query.tip}'`
 
+            client.query("select * from prajituri" + conditieWhere, function (err, rez) {
+                console.log(300)
+                if (err) {
+                    console.log(err);
+                    afiseazaEroare(res, 2);
+                }
+                else
+                    res.render("pagini/produse", { produse: rez.rows, optiuni: rezCategorie.rows});
+            });
+
+        }
+    });
 
 });
 
@@ -144,7 +172,7 @@ app.get("/produs/:id", function (req, res) {
             afiseazaEroare(res, 2);
         }
         else
-            res.render("pagini/produs", { prod: rezultat.rows[0]});
+            res.render("pagini/produs", { prod: rezultat.rows[0] });
     });
 });
 
