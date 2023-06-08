@@ -10,6 +10,18 @@ body {
     --padding-sectiune: 15px;
 }
 
+body.dark{
+    --background-color: #525252;
+    --text-color: white;
+    --border-color: #14402C;
+    --highlight-color: #498C6D;
+    --triunghi-border: #40201B;
+    --triunghi-background1: #f1b5ac;
+    --triunghi-background2: #8C5249;
+    --spatiere-pagina: 30px;
+    --padding-sectiune: 15px;
+}
+
 h1 {
     font-size: 2rem;
     font-weight: bold;

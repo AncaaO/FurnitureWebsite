@@ -6,6 +6,16 @@ const sharp = require('sharp');
 const sass = require('sass');
 const ejs = require('ejs');
 const { Client } = require('pg');
+const AccesBD = require("./module_proprii/accesbd.js");
+
+AccesBD.getInstanta().select({
+    tabel:"produse",
+    campuri:["nume", "pret", "greutate"],
+    conditiiAnd:["pret>100"]
+}, function(err, rez){
+    console.log(err);
+    console.log(rez);
+})
 
 var client = new Client({
     database: "magazin_mobila",
@@ -14,6 +24,7 @@ var client = new Client({
     host: "localhost",
     port: 5432
 });
+
 client.connect();
 client.query("select * from lab8_16", function (err, rez) {
     console.log("Eroare BD", err);
@@ -31,7 +42,7 @@ obGlobal = {
     optiuniMeniu:[]
 }
 
-client.query("select * from unnest(enum_range(null::tipuri_produse))", function (err, rezCategorie) {
+client.query("select * from unnest(enum_range(null::tip_produse))", function (err, rezCategorie) {
     if (err) {
         console.log(err);
     }
@@ -138,7 +149,7 @@ app.get("/produse", function (req, res) {
     //TO DO query pentru a selecta toate produsele
     //TO DO se adauaga filtrarea dupa tipul produsului
     //TO DO se selecteaza si toate valorile din enum-ul categ_prajitura
-    client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rezCategorie) {
+    client.query("select * from unnest(enum_range(null::categorie_produse))", function (err, rezCategorie) {
         if (err) {
             console.log(err);
         }
@@ -147,7 +158,7 @@ app.get("/produse", function (req, res) {
             if (req.query.tip)
                 conditieWhere = ` where tip_produs='${req.query.tip}'`
 
-            client.query("select * from prajituri" + conditieWhere, function (err, rez) {
+            client.query("select * from produse" + conditieWhere, function (err, rez) {
                 console.log(300)
                 if (err) {
                     console.log(err);
@@ -166,7 +177,7 @@ app.get("/produse", function (req, res) {
 app.get("/produs/:id", function (req, res) {
     console.log(req.params);
 
-    client.query(`select * from prajituri where id=${req.params.id}`, function (err, rezultat) {
+    client.query(`select * from produse where id=${req.params.id}`, function (err, rezultat) {
         if (err) {
             console.log(err);
             afiseazaEroare(res, 2);
@@ -176,7 +187,7 @@ app.get("/produs/:id", function (req, res) {
     });
 });
 
-client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rez) {
+client.query("select * from unnest(enum_range(null::categorie_produse))", function (err, rez) {
     console.log(err);
     console.log(rez);
 })

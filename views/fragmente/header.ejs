@@ -1,3 +1,4 @@
+<script src="/resurse/js/tema.js"></script>
 <header>
     <h1>Mobline</h1>
 </header>
@@ -9,8 +10,8 @@
     <input id="ch-menu" type="checkbox">
     <ul class="menu">
         <li class="mainmenu">
-            <div id="acasa">Acasa</div>
-            <div id="acasa-mediu"><span id="casuta" class="fas fa-regular fa-house"></span></div>
+            <div id="acasa"><a href="/">Acasa</a></div>
+            <div id="acasa-mediu"><a href="/"><span id="casuta" class="fas fa-regular fa-house"></span></a></div>
             <ul>
                 <li class="submenu"><a href="#home">Bine ati venit</a></li>
                 <li class="submenu"><a href="#tabel">Transport</a></li>
@@ -25,9 +26,11 @@
         <li class="mainmenu">
             <div>Produse</div>
             <ul>
-                <li class="submenu"><a href="/produse?tip=cofetarie">Mobila</a></li>
-                <li class="submenu"><a href="/produse?tip=gelaterie">Electrocasnice</a></li>
-                <li class="submenu"><a href="/produse?tip=patiserie">Decoratiuni</a></li>
+                <li class="submenu"><a href="/produse">Toate</a></li>
+                <% for (let i=0; i < obGlobal.optiuniMeniu.length; i++) { %>
+                    <li><a href="/produse?tip=<%- obGlobal.optiuniMeniu[i].unnest %>">
+                        <%- obGlobal.optiuniMeniu[i].unnest.charAt(0).toUpperCase()+ obGlobal.optiuniMeniu[i].unnest.slice(1) %></a></li>
+                <% } %>
             </ul>
         </li>
         <li class="mainmenu">
