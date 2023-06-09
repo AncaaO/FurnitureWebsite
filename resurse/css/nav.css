@@ -7,18 +7,19 @@
     --inaltime-meniu: 50px;
     --latime-buton: 150px;
     --culoare-meniu: var(--triunghi-background1);
-    --culoare-border-buton: black;
+    --culoare-border-buton: var(--triunghi-background2);
+    --culoare-text-meniu: var(--text-color);
   }
   nav {
     /* display: none; */
-    --text-meniu: black;
+    --text-meniu: var(--text-color);
     background-color: var(--culoare-meniu);
     width: calc(100vw - 18px);
     height: var(--inaltime-meniu);
     position: sticky;
     top: 0;
     margin-left: calc(-1 * var(--spatiere-pagina));
-    z-index: 1;
+    z-index: 10;
     margin-bottom: 30px;
   }
   ul.menu {
@@ -37,9 +38,10 @@
     box-sizing: border-box;
     position: relative;
   }
+
   ul.menu li:hover {
     overflow: visible;
-    /* background-color: var(--triunghi-background2); */
+    /* background-color: var(--triunghi-background2);  */
   }
   ul.menu li:hover ::after {
     opacity: 1;

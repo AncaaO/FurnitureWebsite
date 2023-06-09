@@ -25,7 +25,33 @@ main{
 
 .grid-produse .produs{
     display: grid;
-    grid-template-areas: "z-stanga z-dreapta";
+    padding: 5px;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-rows: 0.5fr 8fr;
+    grid-template-areas: "z-nume z-nume"
+                        "z-stanga z-dreapta";
+
+}
+
+.nume {
+    grid-area: z-nume;
+}
+
+#stanga {
+    grid-area: z-stanga;
+}
+
+#dreapta {
+    grid-area: z-dreapta;
+}
+
+.grid-produse .nume{
+    padding:10px;
+    text-align: center;
+}
+
+.grid-produse #stanga, #dreapta {
+    padding-left: 10px;
 }
 
 .grid-produse .produs h3 a{
@@ -38,29 +64,29 @@ main{
     text-align: center;
 }
 .grid-produse .produs figure img{
-    border:1px solid grey
+    border:3px solid grey
 }
 .grid-produse .produs .info-prod{
     display:flex;
-    background-color: var(--cl-marcare);
+    /* background-color: white; */
 }
-.grid-produse .produs .info-prod p{
-    width:30%;
-    text-align:center;
+
+ /* .grid-produse .produs .info-prod p{
+
     font-weight:bold;
 }
 
 .grid-produse .produs p.categorie{
 
-    text-align:center;
+    text-align:center; 
     font-weight:bold;
-}
+} */
 
-.info-produse{
-    background-color: var(--cl-marcare);
+/* .info-prod{
+    background-color: red; 
     padding:0.2rem;
     box-shadow: 0px 0px 0.5rem 0.15rem grey;
-}
+} */
 
 .produs{
     position: relative;
@@ -85,4 +111,51 @@ main{
 
 .radio-buttons{
     line-height: 0.2;
+}
+
+#mesaj-invalid{
+    color: rgb(198, 4, 4) !important;
+
+}
+
+.stilizare-caract{
+    font-weight:900; 
+    color: var(--triunghi-background1) !important;
+}
+
+button {
+    margin-bottom: 2px;
+}
+
+.form-control{
+    width:250px; 
+}
+
+.container{
+    margin:0;
+}
+
+.btn{
+    color: var(--text-color);
+    border-color: var(--triunghi-border);
+    background-color: var(--triunghi-background2);
+    border-width:3px;
+}
+
+.btn:hover{
+    color: var(--text-color);
+    border-color: var(--triunghi-background2);
+    background-color: var(--triunghi-background1);
+}
+.form-select{
+    color: var(--text-color);
+    background-color: var(--triunghi-background1);
+}
+.form-check{
+    color: var(--text-color);
+}
+
+.form-check-input{
+    color: var(--text-color);
+    background-color: var(--triunghi-background1);
 }
