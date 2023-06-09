@@ -16,101 +16,118 @@
     <%- include("../fragmente/header") %>
 
     <main>
-        <label> Nume: <input type="text" id="inp-nume"></label>
+        <div class = "container">
+            <div class = "row">
 
-        <div id="radio-buttons"> Categorii: <br><!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <% 
-                let i=1;
-                for (let opt of locals.optiuni) { %>
-                    <input  id="<%- "i_rad" + i -%>" name="gr_rad" value="<%- opt.unnest -%>" type="radio"/>
-                    <label> <%- opt.unnest.charAt(0).toUpperCase() + opt.unnest.slice(1) -%> </label><br>
-            <% i++;
-            } %>
-            <p>
-            <input id="i_rad10" checked name="gr_rad" value="toate" type="radio" />
-            <label>Toate</label>
-        </div>
+                <div class="col-md-5">
+                    <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" id="inp-nume" placeholder="nume">
+                    <label for="inp-nume"> Nume: </label></div><br>
 
-        <label>Textarea:
-            <textarea id="i_textare" rows="1" cols="25"></textarea>
-        </label><br>
+                <div class="form-floating">
+                    <textarea class="form-control form-control-sm" id="i_textare" rows="1" cols="25" placeholder="textare"></textarea>
+                    <label for="i_textare">Cuvant cheie: </label>
+                </div>
 
-        <label> Pret minim: <span class="range-min">0 </span>
-        <input type="range" id="inp-pret" value="0" min="0" max="3900" step="100">
-        <span class="range-max">3900</span><span id="infoRange">(0)</span></label>
-       
-        <label>Select simplu:
-            <select id="inp-disponibilitate">
-                <option id="sel-toate" selected value="toate">toate</option>
-                <option value = "true">disponibil</option>
-                <option value="false">indisponibil</option>
-            </select>
-        </label>
-        
-        <label>Noutăți:
-            <input id="i_check" name="gr_chck" value="2023-06-04 17:20:17.493478" type="checkbox" />
-        </label><br>
+                <% var materiale=[]; for(let prod of locals.produse) { for(let i=0; i < prod.materiale.length ; i++) { var ok=1; for(let
+                j=0; j< materiale.length; j++){ if(materiale[j].startsWith(prod.materiale[i])){ ok=0; break; } } if(ok){
+                materiale.push(prod.materiale[i]); } } } console.log(materiale); %><br>
 
-        <% 
-        var materiale=[]; 
-        for(let prod of locals.produse) { 
-            for(let i=0; i < prod.materiale.length ; i++) { 
-                var ok = 1;
-                for(let j = 0; j< materiale.length; j++){
-                    if(materiale[j].startsWith(prod.materiale[i])){
-                        ok=0; break;
-                    }
-                }
-                if(ok){
-                    materiale.push(prod.materiale[i]);
-                }
-            }
-        }
-        console.log(materiale);
-        %>
+                <label>Alege materialele: <br>
+                    <select class="form-select form-select-sm" id="inp-materiale" multiple
+                        size="<% materiale.length %>">
+                        <% for (let opt of materiale) { %>
+                            <option value="<%- opt %>"><%- opt %> </option>
+                        <% } %>
+                    </select>
+                    </label><br>
 
-        <label>Select multiplu:
-            <select id="inp-materiale" multiple size = "<% materiale.length %>">
-                <% for (let opt of materiale) { %>
-                    <option value="<%- opt %>"><%- opt %> </option>
-                <% } %>
-            </select>
-        </label>
+                <label>Alege disponibilitatea:
+                    <select class="form-select form-select-sm" id="inp-disponibilitate">
+                        <option id="sel-toate" selected value="toate">toate</option>
+                        <option value="true">disponibil</option>
+                        <option value="false">indisponibil</option>
+                    </select>
+                </label><br>
+
+                </div>
+
+
+                <div class="col-md-4">
+                    <h3> Categorii: </h3>
+                    <div class="form-check" id="radio-buttons"><!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
+                        <% let i=1; for (let opt of locals.optiuni) { %>
+                            <input class="form-check-input" id="<%- " i_rad" + i -%>" name="gr_rad" value="<%- opt.unnest -%>"
+                                type="radio"/>
+                                <label class="form-check-label"> <%- opt.unnest.charAt(0).toUpperCase() + opt.unnest.slice(1) -%>
+                                </label><br>
+                                <% i++; } %>
+                                    <p>
+                                        <input class="form-check-input" id="i_rad10" checked name="gr_rad" value="toate"
+                                            type="radio" />
+                                        <label>Toate</label>
+                    </div>
+
+                        <label>Noutăți:
+                            <input class="form-check-input" id="i_check" name="gr_chck" value="2023-06-04 17:20:17.493478"
+                                type="checkbox" />
+                        </label><br>
+
+                        <label> Pret minim: <span class="range-min">0 </span>
+                            <input type="range" id="inp-pret" value="0" min="0" max="3900" step="100">
+                            <span class="range-max">3900</span><span id="infoRange">(0)</span></label>
+
+                        </label>
+
+                </div>
+            </div>
+        </div><br>
+
 
         <p>
-        <button id="filtrare">Filtreaza</button> 
-        <button id="resetare">Reseteaza</button><br>
-        <span id="mesaj-resetare" style = "display:none;">Doriti resetarea filtrelor?<button id="buton-resetare-da">DA</button><button id="buton-resetare-nu">NU</button></span>
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        </p>
-        
+        <button class="btn btn-lg" id="filtrare">Filtreaza</button> 
+        <button class="btn btn-lg" id="resetare">Reseteaza</button><br>
+        <span id="mesaj-resetare" style = "display:none;">Doriti resetarea filtrelor?<button class="btn btn-sm" id="buton-resetare-da">DA</button><button class="btn btn-sm" id="buton-resetare-nu">NU</button></span>
+        <button class="btn btn-sm" id="sortCrescNume">Sorteaza crescator dupa pret si nume</button><br>
+        <button class="btn btn-sm" id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button></p>
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
         
         <section id="produse">
             <h2>Produse</h2>
+            <h2 style="display:none;" id="mesaj-invalid"><b>Nu există rezultate pentru cautarea dumneavoastra! :(</b></h2>
             <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
+                <% for( let prod of locals.produse) { %> 
                     <article id = "<%- "artc-"+ prod.id -%>"class="produs" >
+
+                        <h2 class="nume"><span class="stilizare-caract">Nume: </span><a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a></h2>
+                        
                         <div id="stanga">
-                            <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
                             <div style = "display: block;" class="info-prod">
                                 <figure>
                                     <a href="/produs/<%-prod.id %>"><img src="/resurse/imagini/produse/<%- prod.imagine %>"
                                             style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
                                 </figure><br>
-                                <p style="display:none;" class="id"><%- prod.id%></p><br>
-                                <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p><br>
-                                
-                                <p class="materiale">Materiale: <span class="val-materiale"><%- prod.materiale%></span></p><br>
-                                <p class="disponibilitate">Disponibilitate: <span class="val-disponibilitate"><%- prod.disponibilitate%></span></p><br>
-                                <p class="data">Data adaugare: <span class="val-data" ><%- prod.data_adaugare %></span></p><br>
+                                <p style="display:none;" class="id"><%- prod.id%></p>
+                                <p class="pret"><span class="stilizare-caract">Pret: </span>
+                                    <span class="val-pret"><%- prod.pret%></span></p>
+                                <p class="materiale"><span class="stilizare-caract">Materiale: </span><span class="val-materiale"><%- prod.materiale%></span></p>
+
+                                <% let raspuns="da" ; if(!prod.disponibilitate) raspuns="nu" ; %>
+                                <p class="disponibilitate"><span class="stilizare-caract">Disponibilitate: </span>
+                                    <span style = "display:none; "class="val-disponibilitate"><%- prod.disponibilitate%></span>
+                                    <span><%- raspuns%></span></p>
+                                <p class="data"><span class="stilizare-caract">Data adaugare: </span>
+                                    <span style = "display: none;" class="val-data" ><%- prod.data_adaugare %></span>
+                                    <span class="data-produse"><%- new Date(prod.data_adaugare).toLocaleDateString('ro-RO', {weekday:'long', day: 'numeric' , month: 'long' , year: 'numeric' }) %>
+                                </span></p>
                             </div>
                         </div>
+
                         <div id="dreapta">
-                            <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p><br>
-                            <p class="descriere">Descriere: <span class="val-descriere"><%- prod.descriere%></span></p><br>
+                            <p class="categorie"><span class="stilizare-caract">Categorie: </span><span class="val-categorie"><%- prod.categorie%></span></p>
+                            <p class="descriere"><span class="stilizare-caract">Descriere: </span><span class="val-descriere"><%- prod.descriere%></span></p>
                         </div>
+
                         <label style = "display: none;" class="selecteaza-cos">
                             Selectează:<br/>
                             <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">

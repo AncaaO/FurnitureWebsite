@@ -43,6 +43,8 @@ window.addEventListener("load", function () {
             data_verificare = Date.parse(document.getElementById("i_check").value);
         }
 
+        let ok = 1;
+
         for (let prod of produse) {
             prod.style.display = "none";
 
@@ -76,6 +78,9 @@ window.addEventListener("load", function () {
             let cond4 = (dataAdaugare >= data_verificare);
 
             let descriere = (prod.getElementsByClassName("val-descriere")[0].innerHTML);
+            if(!descriere.includes(textare)){
+                
+            }
             let cond5 = (descriere.includes(textare));
 
 
@@ -99,11 +104,18 @@ window.addEventListener("load", function () {
             
             //console.log(val_materiale);
             if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7) {
-                prod.style.display = "block";
+                prod.style.display = "grid";
+                ok = 0;
             }
 
         }
+
+        if (ok) {
+            document.getElementById("mesaj-invalid").style.display = "inline";
+        }
+
     }
+
 
     document.getElementById("resetare").onclick = function () {
 
@@ -122,6 +134,8 @@ window.addEventListener("load", function () {
             document.getElementById("i_rad10").checked = true;
             var produse = document.getElementsByClassName("produs");
             document.getElementById("infoRange").innerHTML = "(0)";
+            document.getElementById("i_check").checked = false;
+
 
             //resetare ordine produse
             var produse = document.getElementsByClassName("produs");
@@ -141,9 +155,11 @@ window.addEventListener("load", function () {
             }
 
             for (let prod of produse) {
-                prod.style.display = "block";
+                prod.style.display = "grid";
             }
         }
+
+        document.getElementById("mesaj-invalid").style.display = "none";
 
         document.getElementById("buton-resetare-nu").onclick = function () {
             document.getElementById("mesaj-resetare").style.display = "none";

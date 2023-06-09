@@ -25,9 +25,19 @@
 
                     <article>
                         <h2>Mobline <i class="fa fa-loveseat fa-pulse"></i></h2>
-                        <button id= "tema" class="btn btn-primary text-secondary border-success">Schimba tema</button>
-                        <!-- <button class="btn btn-secondary text-primary border-success">altceva</button> -->
-                        <div class="container">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+
+                            <input type="radio" class="btn-check" name="btnradio" id="tema1" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="tema1">Light</label>
+
+                            <input type="radio" class="btn-check" name="btnradio" id="tema2" autocomplete="off" >
+                            <label class="btn btn-outline-primary" for="tema2">Dark</label>
+
+                            <input type="radio" class="btn-check" name="btnradio" id="tema3" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="tema3">Pink</label>
+                        </div> 
+                        <br>
+                        <!-- <div class="container">
                             <div class="row">
                                 <div class="col-sm border border-primary rounded">
                                     Tabel demonstrativ
@@ -39,7 +49,7 @@
                                     Tabel demonstrativ
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <p><em>Magazin online de mobila, decoratiuni si electrocasnice.</em></p>
                         <%- include("../fragmente/galerie.ejs") %>
                         <details>

@@ -1,19 +1,24 @@
-@use '../../node_modules/bootstrap/scss/bootstrap.scss' with ($primary: #F08C7D,
-    $secondary: #74A18D,
-    $success: blue,
-
+@use '../../node_modules/bootstrap/scss/bootstrap.scss' with (
+    $primary: black,
+    $secondary: #F08C7D,
+    $success: #A83523,
+    $info:#5C150A,
     $btn-link-color: #f656d9,
 
-    $border-radius: 1rem,
+    $btn-padding-x: 1rem,
+    $border-radius: 4rem,
+    $btn-border-width: 2px,
 
     $h1-font-size: 4rem,
     $h2-font-size: 3rem,
 
     $font-family-base: "Raleway",
 
-    $grid-breakpoints: (xs: 0,
+    $grid-breakpoints: (
+        xs: 0,
         sm: 1000px,
         md: 1100px,
         lg: 1200px,
         xl: 1300px,
-        xxl: 1400px, ))
+        xxl: 1400px, )
+)
