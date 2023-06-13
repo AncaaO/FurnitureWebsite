@@ -11,6 +11,8 @@
     <%- include("../fragmente/head.ejs") %>     
     <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
     
+
+    <script type="text/javascript" src=/resurse/js/produs.js></script>
 </head>
 
     <body>
@@ -26,7 +28,21 @@
                         <img src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
                     </figure>
                     <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
-                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                Descriere
+                            </button>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <%- locals.prod.descriere %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>         
+                    <span id="id" style="display: none;"> <%- locals.prod.id -%></span>           
                     <p>Greutate: <span class="greutate"><%- locals.prod.greutate %> </span></p>
                     <p>Materiale: <span class="materiale"><%- locals.prod.materiale %> </span></p>
                     <% let raspuns="da" ; if(!locals.prod.disponibilitate) raspuns="nu" ; %>

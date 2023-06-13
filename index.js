@@ -68,7 +68,7 @@ app.use(session({ // aici se creeaza proprietatea session a requestului (pot fol
     saveUninitialized: false
 }));
 
-vectorFoldere = ["temp", "temp1", "backup"];
+vectorFoldere = ["temp", "temp1", "backup", "poze_uploadate"];
 
 for (let folder of vectorFoldere) {
     //let caleFolder = __dirname + "/" + folder;
@@ -157,9 +157,11 @@ app.get("/ceva", function (req, res) {
 })
 
 app.get(["/index", "/", "/home", "/login"], function (req, res) {
-    let sir = req.session.mesajLogin;
-    console.log("mesajLogin:", sir)
-    req.session.mesajLogin = null;
+    
+    let sir = req.session.succesLogin;
+    req.session.succesLogin = null;
+
+
     res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini, mesajLogin:sir });
 })
 
@@ -340,12 +342,12 @@ app.post("/profil", function (req, res) {
                 tabel: "utilizatori",
                 campuri: ["nume", "prenume", "email", "culoare_chat"],
                 valori: [`${campuriText.nume}`, `${campuriText.prenume}`, `${campuriText.email}`, `${campuriText.culoare_chat}`],
-                conditiiAnd: [`parola='${parolaCriptata}'`]
+                conditiiAnd: [`parola='${parolaCriptata}'`, `username='${campuriText.username}'`]
             },
             function (err, rez) {
                 if (err) {
                     console.log(err);
-                    randeazaEroare(res, 2);
+                    afiseazaEroare(res, 2);
                     return;
                 }
                 console.log(rez.rowCount);

@@ -221,4 +221,9 @@ window.addEventListener("load", function () {
         }
     }
 
+    if (document.cookie.includes("ultimul-produs")) {
+        document.getElementById("ultimul-produs").innerHTML = "<a href=" + document.cookie.split("ultimul-produs=")[1].split(" ")[0] + ">Ultimul Produs Accesat</a>";
+    }
+
 });
+

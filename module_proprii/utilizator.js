@@ -10,7 +10,7 @@ class Utilizator{
     static tipConexiune="local";
     static tabel="utilizatori"
     static parolaCriptare="tehniciweb";
-    static emailServer="test.tweb.node@gmail.com";
+    static emailServer ="tehniciweb0007@gmail.com";
     static lungimeCod=64;
     static numeDomeniu="localhost:8080";
     #eroare;
@@ -96,7 +96,7 @@ class Utilizator{
             secure: false,
             auth:{//date login 
                 user:Utilizator.emailServer,
-                pass:"rwgmgkldxnarxrgu"
+                pass:"stdqwfqkuwwcrvdi"
             },
             tls:{
                 rejectUnauthorized:false
@@ -136,23 +136,27 @@ class Utilizator{
         }
         
     }
-    static getUtilizDupaUsername (username,obparam, proceseazaUtiliz){
+    static getUtilizDupaUsername(username, obparam, proceseazaUtiliz) {
         if (!username) return null;
-        let eroare=null;
-        AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori",campuri:['*'],conditiiAnd:[`username=$1`]}, function (err, rezSelect){
-            if(err){
+        let eroare = null;
+
+        AccesBD.getInstanta(Utilizator.tipConexiune).select({ tabel: "utilizatori", campuri: ['*'], conditiiAnd: [`username='${username}'`] }, function (err, rezSelect) {
+            let u = null;
+            if (err) {
                 console.error("Utilizator:", err);
-                console.log("Utilizator",rezSelect.rows.length);
                 //throw new Error()
-                eroare=-2;
+                eroare = -2;
             }
-            else if(rezSelect.rowCount==0){
-                eroare=-1;
+            else if (rezSelect.rowCount == 0) {
+                eroare = -1;
             }
             //constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={})
-            let u= new Utilizator(rezSelect.rows[0])
+            else{
+                u = new Utilizator(rezSelect.rows[0])
+            }
+
             proceseazaUtiliz(u, obparam, eroare);
-        }, [username]);
+        });
     }
 
     areDreptul(drept){

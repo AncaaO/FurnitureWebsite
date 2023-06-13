@@ -25,6 +25,9 @@
 
                     <article>
                         <h2>Mobline <i class="fa fa-loveseat fa-pulse"></i></h2>
+
+                        <span id="ultimul-produs"></span>
+
                         <div class="btn-group" role="group" aria-label="Basic example">
 
                             <input type="radio" class="btn-check" name="btnradio" id="tema1" autocomplete="off">
@@ -50,6 +53,27 @@
                                 </div>
                             </div>
                         </div> -->
+
+                        <% if(!locals.utilizator) { %>
+                            <form id="form_inreg" method="post" class="date" action="/login" enctype="multipart/form-data">
+                                <p>
+                                    <label>
+                                        Username: <input type="text" name="username" id="inp-username" value="" required">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        Parola: <input id="parl" type="password" required name="parola" value="">
+                                    </label>
+                                </p>
+                                <p><input type="submit" value="Logare"></p>
+                            </form>
+                            <p><%- locals.mesajLogin %></p>
+                            <% } else {%>
+                                <%- locals.succesLogin %>
+                                    <% } %>
+
+
                         <p><em>Magazin online de mobila, decoratiuni si electrocasnice.</em></p>
                         <%- include("../fragmente/galerie.ejs") %>
                         <details>

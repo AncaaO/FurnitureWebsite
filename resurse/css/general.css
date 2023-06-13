@@ -263,3 +263,33 @@ footer {
     margin-top: 10px;
     padding: var(--spatiere-pagina);
 }
+
+#banner-cookies{
+    color: var(--text-color);
+    width: 25%;
+    height: 25vw;
+    font-size: 2vw;
+    background-color: var(--triunghi-border);
+    opacity:0.75;
+    z-index: 10;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    animation: animatie-banner-cookies 5s linear;
+}
+
+@keyframes animatie-banner-cookies {
+    0%{
+        width: 0%;
+        height: 0vw;
+        opacity: 0;
+        font-size: 0vw;
+    }
+    100%{
+        width: 25%;
+        height: 25vw;
+        opacity: 0.75;
+        font-size: 2vw;
+    }
+
+}
