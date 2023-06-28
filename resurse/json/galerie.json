@@ -3,6 +3,7 @@
 	"imagini": [
 		{
 			"fisier": "1.jpg",
+			"titlu": "Baie",
 			"descriere": "Baie",
 			"luni": [
 				"martie",
@@ -13,6 +14,7 @@
 		},
 		{
 			"fisier": "2.jpg",
+			"titlu": "Hol",
 			"descriere": "Hol",
 			"luni": [
 				"ianuarie",
@@ -22,6 +24,7 @@
 		},
 		{
 			"fisier": "3.jpg",
+			"titlu": "Fotoliu",
 			"descriere": "Fotoliu",
 			"luni": [
 				"ianuarie",
@@ -33,6 +36,7 @@
 		},
 		{
 			"fisier": "4.jpg",
+			"titlu": "Masuta de cafea",
 			"descriere": "Masuta de cafea",
 			"luni": [
 				"noiembrie",
@@ -41,14 +45,31 @@
 		},
 		{
 			"fisier": "5.jpg",
-			"descriere": "Vaza"
+			"titlu": "Vaza",
+			"descriere": "Vaza",
+			"luni": [
+				"ianuarie",
+				"noiembrie",
+				"iunie",
+				"martie",
+				"aprilie"
+			]
 		},
 		{
 			"fisier": "6.jpg",
-			"descriere": "Masa de dining"
+			"titlu": "Masa de dining",
+			"descriere": "Masa de dining",
+			"luni": [
+				"ianuarie",
+				"noiembrie",
+				"iunie",
+				"martie",
+				"aprilie"
+			]
 		},
 		{
 			"fisier": "7.jpg",
+			"titlu": "Mobilier exterior",
 			"descriere": "Mobilier exterior",
 			"luni": [
 				"ianuarie",

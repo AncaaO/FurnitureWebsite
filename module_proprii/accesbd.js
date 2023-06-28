@@ -117,6 +117,7 @@ class AccesBD{
         */
         this.client.query(comanda,parametriQuery, callback)
     }
+
     async selectAsync({tabel="",campuri=[],conditiiAnd=[]} = {}){
         let conditieWhere="";
         if(conditiiAnd.length>0)
@@ -149,6 +150,7 @@ class AccesBD{
      * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
      * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
      */   
+    
     // update({tabel="",campuri=[],valori=[], conditiiAnd=[]} = {}, callback, parametriQuery){
     //     if(campuri.length!=valori.length)
     //         throw new Error("Numarul de campuri difera de nr de valori")

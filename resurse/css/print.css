@@ -37,10 +37,6 @@
         color: black;
     }
 
-    .ullista div {
-        display: none;
-    }
-
     h1 {
         margin-top: 50%;
         text-align: center;
@@ -90,7 +86,7 @@
         opacity: 1;
 
     }
-
+ 
     #watermark::after {
         opacity: 0.3;
         display: block;
@@ -98,7 +94,7 @@
         content: 'Anca \A Oprea';
         white-space: pre-wrap;
         text-align: center;
-    }
+    }  
 
     footer {
         page-break-before: always;
@@ -111,7 +107,6 @@
     margin-bottom: 2cm;
     margin-top: 2cm;
     counter-increment: page;
-
 }
 
 @page: left {

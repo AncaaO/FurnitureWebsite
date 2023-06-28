@@ -29,9 +29,21 @@
                     <label for="i_textare">Cuvant cheie: </label>
                 </div>
 
-                <% var materiale=[]; for(let prod of locals.produse) { for(let i=0; i < prod.materiale.length ; i++) { var ok=1; for(let
-                j=0; j< materiale.length; j++){ if(materiale[j].startsWith(prod.materiale[i])){ ok=0; break; } } if(ok){
-                materiale.push(prod.materiale[i]); } } } console.log(materiale); %><br>
+                <% var materiale=[]; 
+                for(let prod of locals.produse) { 
+                    for(let i=0; i < prod.materiale.length ; i++) { 
+                        var ok=1; 
+                        for(let j=0; j< materiale.length; j++){ 
+                            if(materiale[j].startsWith(prod.materiale[i])){ 
+                                ok=0; 
+                                break; 
+                            } 
+                        } 
+                        if(ok){ 
+                            materiale.push(prod.materiale[i]); 
+                        } 
+                    } 
+                } console.log(materiale); %><br>
 
                 <label>Alege materialele: <br>
                     <select class="form-select form-select-sm" id="inp-materiale" multiple
@@ -54,19 +66,19 @@
 
 
                 <div class="col-md-4">
-                    <h3> Categorii: </h3>
+                    <span> Categorii: </span>
                     <div class="form-check" id="radio-buttons"><!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-                        <% let i=1; for (let opt of locals.optiuni) { %>
-                            <input class="form-check-input" id="<%- " i_rad" + i -%>" name="gr_rad" value="<%- opt.unnest -%>"
-                                type="radio"/>
-                                <label class="form-check-label"> <%- opt.unnest.charAt(0).toUpperCase() + opt.unnest.slice(1) -%>
-                                </label><br>
-                                <% i++; } %>
-                                    <p>
-                                        <input class="form-check-input" id="i_rad10" checked name="gr_rad" value="toate"
-                                            type="radio" />
-                                        <label>Toate</label>
-                    </div>
+                        <% let i=1; 
+                        for (let opt of locals.optiuni) { %>
+                            <input class="form-check-input" id="<%- " i_rad" + i -%>" name="gr_rad" value="<%- opt.unnest -%>" type="radio"/>
+                            <label class="form-check-label"> 
+                                <%- opt.unnest.charAt(0).toUpperCase() + opt.unnest.slice(1) -%>
+                            </label><br>
+                            <% i++; } %>
+                    <p>
+                    <input class="form-check-input" id="i_rad10" checked name="gr_rad" value="toate" type="radio" />
+                    <label>Toate</label>
+                </div>
 
                         <label>Noutăți:
                             <input class="form-check-input" id="i_check" name="gr_chck" value="2023-06-04 17:20:17.493478"
@@ -76,24 +88,20 @@
                         <label> Pret minim: <span class="range-min">0 </span>
                             <input type="range" id="inp-pret" value="0" min="0" max="3900" step="100">
                             <span class="range-max">3900</span><span id="infoRange">(0)</span></label>
-
                         </label>
 
                 </div>
             </div>
         </div><br>
 
-
-        <p>
-        <button class="btn btn-lg" id="filtrare">Filtreaza</button> 
-        <button class="btn btn-lg" id="resetare">Reseteaza</button><br>
+        <p><button class="btn btn-lg" id="resetare">Reseteaza</button><br>
         <span id="mesaj-resetare" style = "display:none;">Doriti resetarea filtrelor?<button class="btn btn-sm" id="buton-resetare-da">DA</button><button class="btn btn-sm" id="buton-resetare-nu">NU</button></span>
         <button class="btn btn-sm" id="sortCrescNume">Sorteaza crescator dupa pret si nume</button><br>
         <button class="btn btn-sm" id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button></p>
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
         
 
-            <p id="ultimul-produs"></p>
+        <p id="ultimul-produs"></p>
 
         <section id="produse">
             <h2>Produse</h2>
@@ -139,6 +147,9 @@
                     </article>
                 <% }%>
             </div>
+
+            <div style="margin-top: 20px; text-align: center;" id="butoane-pagina"></div>
+
         </section>
     </main>
 

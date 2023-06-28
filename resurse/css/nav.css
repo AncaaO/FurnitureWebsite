@@ -40,19 +40,19 @@
     overflow: visible;
     /* background-color: var(--triunghi-background2); */
   }
-  ul.menu li:hover ::after {
+  ul.menu li:hover li::after {
     opacity: 1;
   }
   ul.menu li:hover ul {
     opacity: 1;
     transform: scale(1, 1);
   }
-  ul.menu li > li {
+  ul.menu li li {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: var(--latime-buton);
   }
-  ul.menu li > li::after {
+  ul.menu li li::after {
     content: " ";
     display: block;
     height: 10px;
@@ -62,7 +62,7 @@
     left: 0px;
     background-image: linear-gradient(90deg, var(--triunghi-background1), white);
     opacity: 0;
-    transition: all 0.3s linear;
+    transition: all 1s linear;
   }
   ul.menu ul {
     /* opacity: 0; */
@@ -70,7 +70,7 @@
     transform: scale(1, 0);
     transform-origin: center center;
   }
-  ul.menu ul > li {
+  ul.menu ul li {
     width: var(--latime-buton);
     height: var(--inaltime-meniu);
     background-color: var(--culoare-meniu);

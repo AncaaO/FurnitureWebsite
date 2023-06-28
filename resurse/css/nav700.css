@@ -22,8 +22,13 @@ ul.menu {
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
     transform-origin: top left;
-
+    /* position: relative;  */
 }
+/* 
+ul.menu ul>li{
+    z-index: 11;
+    position: absolute; 
+}  */
 
 #ch-menu:checked+ul.menu {
     display: block;

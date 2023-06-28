@@ -1,0 +1,14 @@
+@media screen and (max-width:1000px) {
+    #grid-galerie {
+        display: grid !important;
+            /* grid-template-columns: repeat(3, 1fr); */
+        grid-template-areas: "z-img1 z-img2"
+            "z-img3 z-img4"
+            "z-img5 z-img6"
+            "z-img7 z-img8"
+            "z-img9 z-img10"
+            "z-img11 z-img12"
+        ;
+            /* nrimag=3 */
+        }
+}

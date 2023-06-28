@@ -29,13 +29,12 @@ var client = new Client({
     host: "localhost",
     port: 5432
 });
-
 client.connect();
 
 client.query("select * from lab8_16", function (err, rez) {
     console.log("Eroare BD", err);
 
-    console.log("Rezultat BD", rez.rows);
+    //console.log("Rezultat BD", rez.rows);
 });
 
 
@@ -68,7 +67,7 @@ app.use(session({ // aici se creeaza proprietatea session a requestului (pot fol
     saveUninitialized: false
 }));
 
-vectorFoldere = ["temp", "temp1", "backup", "poze_uploadate"];
+vectorFoldere = ["temp", "backup", "poze_uploadate"];
 
 for (let folder of vectorFoldere) {
     //let caleFolder = __dirname + "/" + folder;
@@ -106,7 +105,6 @@ function compileazaScss(caleScss, caleCss) {
     }
     rez = sass.compile(caleScss, { "sourceMap": true });
     fs.writeFileSync(caleCss, rez.css)
-    //    console.log("Compilare SCSS", rez);
 }
 
 //compileazaScss("a.scss");
@@ -165,6 +163,9 @@ app.get(["/index", "/", "/home", "/login"], function (req, res) {
     res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini, mesajLogin:sir });
 })
 
+app.get("/galerie_pagina", function (req, res) {
+    res.render("pagini/galerie_pagina", { imagini: obGlobal.obImagini.imagini });
+})
 
 app.get("/produse", function (req, res) {
     //TO DO query pentru a selecta toate produsele
@@ -196,7 +197,7 @@ app.get("/produse", function (req, res) {
 
 
 app.get("/produs/:id", function (req, res) {
-    console.log(req.params);
+    //console.log(req.params);
 
     client.query(`select * from produse where id=${req.params.id}`, function (err, rezultat) {
         if (err) {
@@ -494,7 +495,7 @@ function initErori() {
 
 initErori();
 
-
+//////////////////////////////////////////////////////////////////////////
 
 function initImagini() {
     var continut = fs.readFileSync(__dirname + "/resurse/json/galerie.json").toString("utf-8");
@@ -503,23 +504,37 @@ function initImagini() {
 
     let caleAbs = path.join(__dirname, obGlobal.obImagini.cale_galerie);
     let caleAbsMediu = path.join(__dirname, obGlobal.obImagini.cale_galerie, "mediu");
+    let caleAbsMic = path.join(__dirname, obGlobal.obImagini.cale_galerie, "mic");
+
     if (!fs.existsSync(caleAbsMediu))
         fs.mkdirSync(caleAbsMediu);
+    if (!fs.existsSync(caleAbsMic))
+        fs.mkdirSync(caleAbsMic);
 
     for (let imag of vImagini) {
 
         [numeFis, ext] = imag.fisier.split(".");
         let caleFisAbs = path.join(caleAbs, imag.fisier);
         let caleFisMediuAbs = path.join(caleAbsMediu, numeFis + ".webp");
+        let caleFisMicAbs = path.join(caleAbsMic, numeFis + ".webp");
+
         sharp(caleFisAbs).resize(400).toFile(caleFisMediuAbs);
-        imag.fisier_mediu = path.join("/", obGlobal.obImagini.cale_galerie, "mediu", numeFis + ".webp")
-        imag.fisier = path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier)
+
+        imag.fisier_mediu = path.join("/", obGlobal.obImagini.cale_galerie, "mediu", numeFis + ".webp");
+        //imag.fisier = path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier);
+
+        sharp(caleFisAbs).resize(250).toFile(caleFisMicAbs);
+
+        imag.fisier_mic = path.join("/", obGlobal.obImagini.cale_galerie, "mic", numeFis + ".webp");
+        imag.fisier = path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier);
 
         //eroare.imagine = "/" + obGlobal.obErori.cale_baza + "/" + eroare.imagine;
     }
 }
 
 initImagini();
+
+
 
 //function afiseazaEroare(res, { _identificator, _titlu, _text, _imagine } = {}) {
 function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _imagine) {

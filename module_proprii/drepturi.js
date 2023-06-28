@@ -9,7 +9,6 @@
  @property {Symbol} vizualizareGrafice Dreptul de a vizualiza graficele de vanzari
  */
 
-
 /**
  * @name module.exports.Drepturi
  * @type Drepturi

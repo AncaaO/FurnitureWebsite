@@ -3,30 +3,32 @@
   #ch-menu {
     display: none;
   }
+
   body {
     --inaltime-meniu: 50px;
     --latime-buton: 150px;
     --culoare-meniu: var(--triunghi-background1);
-    --culoare-border-buton: var(--triunghi-background2);
-    --culoare-text-meniu: var(--text-color);
+    --culoare-border-buton: black;
   }
+
   nav {
-    /* display: none; */
-    --text-meniu: var(--text-color);
+    --text-meniu: black;
     background-color: var(--culoare-meniu);
     width: calc(100vw - 18px);
     height: var(--inaltime-meniu);
     position: sticky;
     top: 0;
     margin-left: calc(-1 * var(--spatiere-pagina));
-    z-index: 10;
+    z-index: 1;
     margin-bottom: 30px;
   }
+
   ul.menu {
     display: flex;
     justify-content: flex-start;
     justify-content: flex-start;
   }
+
   ul.menu li {
     width: var(--latime-buton);
     height: var(--inaltime-meniu);
@@ -41,20 +43,24 @@
 
   ul.menu li:hover {
     overflow: visible;
-    /* background-color: var(--triunghi-background2);  */
+    /* background-color: var(--triunghi-background2); */
   }
-  ul.menu li:hover ::after {
+
+  ul.menu li:hover::after {
     opacity: 1;
   }
+
   ul.menu li:hover ul {
     opacity: 1;
     transform: scale(1, 1);
   }
+
   ul.menu li > li {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: var(--latime-buton);
   }
+
   ul.menu li > li::after {
     content: " ";
     display: block;
@@ -67,12 +73,14 @@
     opacity: 0;
     transition: all 0.3s linear;
   }
+
   ul.menu ul {
     /* opacity: 0; */
     transition: all 0.3s linear;
     transform: scale(1, 0);
     transform-origin: center center;
   }
+
   ul.menu ul > li {
     width: var(--latime-buton);
     height: var(--inaltime-meniu);
@@ -82,16 +90,19 @@
     border: 1px solid var(--culoare-border-buton);
     transition: background-color 0.3s linear;
   }
+
   ul.menu ul > li:hover {
     background-color: var(--triunghi-background2);
     --text-meniu: white;
   }
+
   ul.menu,
   ul.menu ul {
     padding: 0;
     margin: 0;
     list-style-type: none;
   }
+
   ul.menu li div,
   ul.menu li a {
     display: block;
@@ -102,9 +113,11 @@
     font-weight: bold;
     line-height: var(--inaltime-meniu);
   }
+
   #acasa-mediu {
     display: none;
   }
+
   .mainmenu::before {
     box-shadow: 0 0 0 10px #27d9b4, inset 0 0 0 10px #fff;
   }

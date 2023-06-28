@@ -69,9 +69,10 @@
   /* nrimag=3 */
 }
 
+/* 
 #grid-galerie img {
   width: 100%;
-}
+} */
 
 #grid-galerie figcaption {
   text-align: center;
@@ -89,13 +90,14 @@
 }
 
 #grid-galerie picture:hover + figcaption{
-  font-size: 30px;
+  /* font-size: 30px; */
+  transform: scale(2, 2); 
   transition: all 1.1s;
-}
+}  
 
-@media screen and (max-width:500px) {
+
+/* @media screen and (max-width:500px) {
   #grid-galerie {
     display: block;
   }
-}
-
+} */

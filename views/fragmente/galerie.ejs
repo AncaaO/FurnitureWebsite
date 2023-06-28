@@ -1,7 +1,13 @@
+<h2><a href="/galerie_pagina">Galerie imagini</a></h2>
+
 <div id="grid-galerie">
-    <% let i=0; for (let imag of locals.imagini) { d=new Date(); var v_luni=["ianuarie", "februarie" , "martie"
-        ,"aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"]; if(imag.luni &&
-        imag.luni.includes(v_luni[d.getMonth()]) && i<=12) { i=i+1; %>
+    <% let i=0; 
+    for (let imag of locals.imagini) { 
+        d=new Date(); 
+        var v_luni=["ianuarie", "februarie" , "martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"]; 
+        
+        if(imag.luni && imag.luni.includes(v_luni[d.getMonth()]) && i<=12) { 
+            i=i+1; %>
 
         <section id="<%-"imagine-galerie"+i%>">
             <figure>
