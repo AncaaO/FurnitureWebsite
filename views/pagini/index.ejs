@@ -39,7 +39,7 @@
                             <input type="radio" class="btn-check" name="btnradio" id="tema3" autocomplete="off">
                             <label class="btn btn-outline-primary" for="tema3">Pink</label>
                         </div> 
-                        <br>
+                        <p></p>
                         <!-- <div class="container">
                             <div class="row">
                                 <div class="col-sm border border-primary rounded">
@@ -58,7 +58,7 @@
                             <form id="form_inreg" method="post" class="date" action="/login" enctype="multipart/form-data">
                                 <p>
                                     <label>
-                                        Username: <input type="text" name="username" id="inp-username" value="" required">
+                                        Username: <input type="text" name="username" id="inp-username" value="" required>
                                     </label>
                                 </p>
                                 <p>
@@ -76,7 +76,7 @@
 
                         <p><em>Magazin online de mobila, decoratiuni si electrocasnice.</em></p>
                         
-                        <%- include("../fragmente/galerie.ejs") %>
+                        <%- include("../fragmente/galerie.ejs", {imagini: locals.imagini}) %>
                         
                         <details>
                             <summary>Intrebari frecvente</summary>

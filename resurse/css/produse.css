@@ -159,3 +159,31 @@ button {
     color: var(--text-color);
     background-color: var(--triunghi-background1);
 }
+---------------------------------------------------------- 
+.buton_filtre {
+    position: relative;
+}
+
+.eticheta_filtre {
+    visibility: hidden;
+    background-color: black;
+    color: white;
+    opacity: 0;
+    border-radius: 0.5rem;
+    z-index: 10 !important;
+    position: absolute;
+    font-size: 12px;
+    top: 40px;
+    transition: opacity 0.5s linear;
+    width: 100px;
+}
+
+.buton_filtre:hover .eticheta_filtre {
+    visibility: visible;
+    opacity: 0.5;
+}
+
+.produs_fixat {
+    background-color: var(--triunghi-border) !important;
+    color: var(--triunghi-background2) !important;
+}

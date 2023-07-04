@@ -67,8 +67,6 @@ class AccesBD{
                 switch(init){
                     case "local":this.#instanta.initLocal();
                 }
-                
-
                 //daca ajunge aici inseamna ca nu s-a produs eroare la initializare
                 
             }
@@ -82,7 +80,6 @@ class AccesBD{
 
 
 
-
     /**
      * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
      * @property {string} tabel - numele tabelului
@@ -90,8 +87,6 @@ class AccesBD{
      * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
      */
 
-
-    
     /**
      * callback pentru queryuri.
      * @callback QueryCallBack
@@ -104,16 +99,19 @@ class AccesBD{
      * @param {ObiectQuerySelect} obj - un obiect cu datele pentru query
      * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
      */
+
+
     select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback, parametriQuery=[]){
         let conditieWhere="";
+
         if(conditiiAnd.length>0)
             conditieWhere=`where ${conditiiAnd.join(" and ")}`; 
+
         let comanda=`select ${campuri.join(",")} from ${tabel} ${conditieWhere}`;
         console.error(comanda);
         /*
         comanda=`select id, camp1, camp2 from tabel where camp1=$1 and camp2=$2;
         this.client.query(comanda,[val1, val2],callback)
-
         */
         this.client.query(comanda,parametriQuery, callback)
     }

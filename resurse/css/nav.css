@@ -17,7 +17,7 @@
     position: sticky;
     top: 0;
     margin-left: calc(-1 * var(--spatiere-pagina));
-    z-index: 1;
+    z-index: 10;
     margin-bottom: 30px;
   }
   ul.menu {
@@ -105,4 +105,8 @@
   .mainmenu::before {
     box-shadow: 0 0 0 10px #27d9b4, inset 0 0 0 10px #fff;
   }
+.submenu{
+  z-index:12;
+}
+
 }

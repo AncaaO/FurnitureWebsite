@@ -24,23 +24,23 @@
 		</script>
 		<% } %>
 	</head>
-	<body class="container">
-		<header>
-			<%- include("../fragmente/header") %>
-		</header>
+	<body >
+		<%- include("../fragmente/header") %>
 		<main>
 			<% if(locals.utilizator) { %>
 			<section>
 				<h2>Profil</h2>
-                <p>Mănânci prea multe prajituri și știi și tu asta!</p>
+                <p>Bine ai venit in contul tau!</p>
 				<p><%= locals.raspuns %></p>
 				<img src="/<%- locals.utilizator.poza%>" alt="nu ati incarcat poza de profil" />
 			</section>
 			<%- include("../fragmente/formular",{action:"/profil"}) %>
-		</main>
+
 		<% } else { %>
 			<p>Nu sunteti logat</p>
 		<% } %>
+		<p><%- locals.mesaj %></p>
+		</main>
 		<%- include("../fragmente/footer") %>
 		
 	</body>

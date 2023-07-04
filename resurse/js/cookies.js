@@ -1,5 +1,4 @@
 
-
 //setCookie("a",10, 1000)
 function setCookie(nume, val, timpExpirare){//timpExpirare in milisecunde
     d=new Date();

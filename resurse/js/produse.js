@@ -1,47 +1,48 @@
 window.addEventListener("load", function () {
+
+
+    // let iduriProduse = localStorage.getItem("cos_virtual");
+    // iduriProduse = iduriProduse ? iduriProduse.split(",") : [];      //["3","1","10","4","2"]
+
+    // for (let idp of iduriProduse) {
+    //     let ch = document.querySelector(`[value='${idp}'].select-cos`);
+    //     if (ch) {
+    //         ch.checked = true;
+    //     }
+    //     else {
+    //         console.log("id cos virtual inexistent:", idp);
+    //     }
+    // }
+
+    // //----------- adaugare date in cosul virtual (din localStorage)
+    // let checkboxuri = document.getElementsByClassName("select-cos");
+    // for (let ch of checkboxuri) {
+    //     ch.onchange = function () {
+    //         let iduriProduse = localStorage.getItem("cos_virtual");
+    //         iduriProduse = iduriProduse ? iduriProduse.split(",") : [];
+
+    //         if (this.checked) {
+    //             iduriProduse.push(this.value)
+    //         }
+    //         else {
+    //             let poz = iduriProduse.indexOf(this.value);
+    //             if (poz != -1) {
+    //                 iduriProduse.splice(poz, 1);
+    //             }
+    //         }
+
+    //         localStorage.setItem("cos_virtual", iduriProduse.join(","))
+    //     }
+
+    // }
+
+
     let k = 4;
     let pg = 1;
     let indexprod;
 
     filtrare();
 
-    // if(this.localStorage.getItem("ok")){
-    //     salvare_filtre();
-    // }
-
-    // function salvare_filtre() {
-
-    //         document.getElementById("mesaj-invalid").style.display = "none";
-
-    //         document.getElementById("inp-nume").value = localStorage.getItem("nume-salvat");
-    //         document.getElementById("i_textare").value = localStorage.getItem("textare-salvat");
-            
-    //         for (let opt of localStorage.getItem("material-salvat")) {
-    //             for (let material of document.getElementById("inp-materiale").options) {
-    //                 if (material == opt) {
-    //                     document.getElementById("inp-materiale").value = opt;
-    //                 }
-    //             }
-    //         }
-
-    //         let radiobuttons = document.getElementsByName("gr_rad");
-    //         let val_categorie;
-    //         for (let r of radiobuttons) {
-    //             if (r == localStorage.getItem("categotie-salvat")) {
-    //                 val_categorie.checked = true;
-    //                 break;
-    //             }
-    //         }
-
-    //         document.getElementById("inp-pret").value = localStorage.getItem("pret-salvat");
-    //         document.getElementById("i_check").checked = localStorage.getItem("noutati-salvat");
-
-    //         filtrare();
-    // }
-
-    // document.getElementById("inp-salvare").onchange = function () {
-    //     filtrare();
-    // }
     document.getElementById("inp-nume").onchange = function () {
         filtrare();
     }
@@ -65,9 +66,16 @@ window.addEventListener("load", function () {
         filtrare();
     }
 
-    function filtrare(){
+    function filtrare(flag = true){
 
         document.getElementById("mesaj-invalid").style.display = "none";
+
+        if (flag) {
+            for (let prod of document.getElementsByClassName("produs")) {
+                if (localStorage.getItem(prod.id))
+                    localStorage.removeItem(prod.id);
+            }
+        }
 
         let radiobuttons = document.getElementsByName("gr_rad");
         let val_categorie;
@@ -141,6 +149,11 @@ window.addEventListener("load", function () {
             }
             let cond5 = (descriere.includes(textare));
 
+            let cond8 = prod.classList.contains("produs_fixat");
+
+            let cond9 = localStorage.getItem(prod.id);
+
+            let cond10 = sessionStorage.getItem(prod.id);
 
             let materiale = (prod.getElementsByClassName("materiale")[0].innerHTML);
             //console.log(materiale);
@@ -158,7 +171,7 @@ window.addEventListener("load", function () {
             let disponibilitate = (prod.getElementsByClassName("val-disponibilitate")[0].innerHTML);
             let cond7 = (val_disponibilitate == "toate" || val_disponibilitate == disponibilitate);
             
-            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7) {
+            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && !cond9 && !cond10 || cond8) {
                 ok = 0;
                 indexprod++;
 
@@ -188,7 +201,7 @@ window.addEventListener("load", function () {
         for (var but_pagina of document.getElementsByClassName("link-pagina")) {
             but_pagina.onclick = function () {
                 pg = this.id;
-                filtrare();
+                filtrare(false);
             };
         }
 
@@ -263,7 +276,6 @@ window.addEventListener("load", function () {
 
     function sortare(semn) {
 
-
         var produse = document.getElementsByClassName("produs");
         var v_produse = Array.from(produse);
     
@@ -321,6 +333,33 @@ window.addEventListener("load", function () {
 
     if (document.cookie.includes("ultimul-produs")) {
         document.getElementById("ultimul-produs").innerHTML = "<a href=" + document.cookie.split("ultimul-produs=")[1].split(" ")[0] + ">Ultimul Produs Accesat</a>";
+    }
+
+
+    for (let butoane of document.getElementsByClassName("buton_filtre_fix")) {
+        butoane.onclick = function () {
+            if (document.getElementById("artc-" + butoane.id.split('.')[1]).classList.contains("produs_fixat"))
+                document.getElementById("artc-" + butoane.id.split('.')[1]).classList.remove("produs_fixat");
+            else
+                document.getElementById("artc-" + butoane.id.split('.')[1]).classList.add("produs_fixat");
+        }
+    }
+
+    for (let butoane of document.getElementsByClassName("buton_filtre_sters")) {
+
+        butoane.onclick = function () {
+
+            localStorage.setItem("artc-" + butoane.id.split('.')[1], 1);
+            console.log(localStorage);
+            filtrare(false);
+        }
+    }
+
+    for (let butoane of document.getElementsByClassName("buton_filtre_sters_session")) {
+        butoane.onclick = function () {
+            sessionStorage.setItem("artc-" + butoane.id.split('.')[1], 1);
+            filtrare();
+        }
     }
 
 });

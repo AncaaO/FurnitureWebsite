@@ -33,6 +33,9 @@
                 <% } %>
             </ul>
         </li>
+            <li class="mainmenu">
+                <div><a href="/despre">Despre</a></div>
+        </li>
         <% if(locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) { %>
             <li>
                 <div>Administrare</div>
@@ -45,7 +48,7 @@
             <% } %>
                 <% if(locals.utilizator) { %>
                     <li>
-                        <div><%- locals.utilizator.username %></div>
+                        <div>Contul meu</div>
                         <ul>
                             <li><a href="/profil">Profil</a></li>
                             <li><a href="/logout">Logout</a></li>
@@ -55,8 +58,6 @@
         <li class="inregistrare">
             <a href="/inregistrare">Inregistrare</a>
         </li>
-        <li class="mainmenu">
-            <div><a href="/despre">Despre</a></div>
-        </li>
+
     </ul>
 </nav>

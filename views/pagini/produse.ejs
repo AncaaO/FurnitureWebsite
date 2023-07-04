@@ -98,8 +98,10 @@
         <span id="mesaj-resetare" style = "display:none;">Doriti resetarea filtrelor?<button class="btn btn-sm" id="buton-resetare-da">DA</button><button class="btn btn-sm" id="buton-resetare-nu">NU</button></span>
         <button class="btn btn-sm" id="sortCrescNume">Sorteaza crescator dupa pret si nume</button><br>
         <button class="btn btn-sm" id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button></p>
+
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
         
+
 
         <p id="ultimul-produs"></p>
 
@@ -108,6 +110,7 @@
             <h2 style="display:none;" id="mesaj-invalid"><b>Nu există rezultate pentru cautarea dumneavoastra! :(</b></h2>
             <div class="grid-produse">
                 <% for( let prod of locals.produse) { %> 
+
                     <article id = "<%- "artc-"+ prod.id -%>"class="produs" >
 
                         <h2 class="nume"><span class="stilizare-caract">Nume: </span><a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a></h2>
@@ -137,6 +140,29 @@
                         <div id="dreapta">
                             <p class="categorie"><span class="stilizare-caract">Categorie: </span><span class="val-categorie"><%- prod.categorie%></span></p>
                             <p class="descriere"><span class="stilizare-caract">Descriere: </span><span class="val-descriere"><%- prod.descriere%></span></p>
+
+                            <div style="position: relative; display: flex; justify-content: center;">
+                                <button class="btn btn-sm buton_filtre buton_filtre_fix" id="<%-" buton_filtrare_fix."+ prod.id -%>"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
+                                    </svg><span class="eticheta_filtre">Fixeaza produsul</span></button>
+                            
+                                <button class="btn btn-sm buton_filtre buton_filtre_sters" id="<%-" buton_filtrare_sters."+ prod.id -%>"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg><span class="eticheta_filtre">Sterge temporar produsul</span></button>
+                            
+                                <button class="btn btn-sm buton_filtre buton_filtre_sters_session" id="<%-" buton_filtrare_sters_session."+ prod.id
+                                    -%>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-stopwatch-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6.5 0a.5.5 0 0 0 0 1H7v1.07A7.001 7.001 0 0 0 8 16a7 7 0 0 0 5.29-11.584.531.531 0 0 0 .013-.012l.354-.354.353.354a.5.5 0 1 0 .707-.707l-1.414-1.415a.5.5 0 1 0-.707.707l.354.354-.354.354a.717.717 0 0 0-.012.012A6.973 6.973 0 0 0 9 2.071V1h.5a.5.5 0 0 0 0-1h-3zm2 5.6V9a.5.5 0 0 1-.5.5H4.5a.5.5 0 0 1 0-1h3V5.6a.5.5 0 1 1 1 0z" />
+                                    </svg><span class="eticheta_filtre">Sterge produsul pe timpul sesiunii curente</span></button>
+                            </div>
                         </div>
 
                         <label style = "display: none;" class="selecteaza-cos">
